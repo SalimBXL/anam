@@ -22,23 +22,27 @@ class _PatientSheetState extends State<PatientSheet> {
           container(injection()),
           container(scan()),
           container(misc()),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.all(8),
-              child: FlatButton(
-                padding: EdgeInsets.all(8),
-                color: Colors.indigo,
-                onPressed: () {
-                  // Navigate back to first route when tapped.
-                },
-                child: Text(
-                  'Ok',
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
-          ),
+          buttonOk(),
         ],
+      ),
+    );
+  }
+
+  Expanded buttonOk() {
+    return Expanded(
+      child: Container(
+        margin: EdgeInsets.all(8),
+        child: FlatButton(
+          padding: EdgeInsets.all(8),
+          color: Colors.indigo,
+          onPressed: () {
+            // Navigate back to first route when tapped.
+          },
+          child: Text(
+            'Ok',
+            style: TextStyle(color: Colors.white),
+          ),
+        ),
       ),
     );
   }
