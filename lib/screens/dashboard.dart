@@ -58,9 +58,7 @@ class _DashboardState extends State<Dashboard> {
               ),
               DashboardButton(
                 listLength:
-                patients
-                    .getPatientsWithStatus(PatientStatus.active)
-                    .length,
+                    patients.getPatientsWithStatus(PatientStatus.active).length,
                 color: patientStatusColor[PatientStatus.active],
                 action: () {
                   setState(() {
@@ -72,9 +70,7 @@ class _DashboardState extends State<Dashboard> {
               DashboardButton(
                 // PATIENTS DONE
                 listLength:
-                patients
-                    .getPatientsWithStatus(PatientStatus.done)
-                    .length,
+                    patients.getPatientsWithStatus(PatientStatus.done).length,
                 color: patientStatusColor[PatientStatus.done],
                 action: () {
                   setState(() {
