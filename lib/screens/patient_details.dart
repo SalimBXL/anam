@@ -1,5 +1,8 @@
+import 'package:anam/widgets/button_ok.dart';
+import 'package:anam/widgets/card_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PatientDetails extends StatefulWidget {
   PatientDetails({Key key}) : super(key: key);
@@ -11,61 +14,41 @@ class PatientDetails extends StatefulWidget {
 class _PatientDetailsState extends State<PatientDetails> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          container(patientName()),
-          container(ambu()),
-          container(patientMisc()),
-          container(annotation()),
-          buttonOk(),
-        ],
-      ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            CardBloc(content: patientName()),
+            CardBloc(content: ambu()),
+            CardBloc(content: patientMisc()),
+            CardBloc(content: annotation()),
+          ],
+        ),
+        ButtonOk(action: () {}),
+      ],
     );
   }
 
-  Expanded buttonOk() {
-    return Expanded(
-      child: Container(
-        margin: EdgeInsets.all(8),
-        child: FlatButton(
-          padding: EdgeInsets.all(8),
-          color: Colors.indigo,
-          onPressed: () {
-            // Navigate back to first route when tapped.
-          },
+  Row annotation() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisSize: MainAxisSize.max,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Icon(FontAwesomeIcons.notesMedical),
+        Expanded(
           child: Text(
-            'Ok',
-            style: TextStyle(color: Colors.white),
+            'hufheuhfjkhdjvhrukqhkhwjfhdwhd, bnnjfdqkhkjn jrqhc gheqkghrc, gq, iljk, hj khfjnhbjn jkbwfdjkbk',
+            overflow: TextOverflow.ellipsis,
+            softWrap: true,
+            maxLines: 3,
           ),
         ),
-      ),
-    );
-  }
-
-  Expanded container(Widget f) {
-    return Expanded(
-      child: Container(
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(10.0),
-          color: Colors.indigo.shade50,
-        ),
-        margin: EdgeInsets.all(8),
-        padding: EdgeInsets.all(8),
-        child: f,
-      ),
-    );
-  }
-
-  Text annotation() {
-    return Text(
-      'Annotation : hufheuhfjkhdjvhrukqhkhwjfhdwhd, bnnjfdqkhkjn jrqhc gheqkghrc, gq, iljk, hj khfjnhbjn jkbwfdjkbk',
-      overflow: TextOverflow.ellipsis,
-      softWrap: true,
-      maxLines: 3,
+      ],
     );
   }
 
@@ -107,8 +90,18 @@ class _PatientDetailsState extends State<PatientDetails> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            Text('Age : 16 ans'),
-            Text('Statut : '),
+            Row(
+              children: [
+                Icon(FontAwesomeIcons.male),
+                Text(' Age : 16 ans'),
+              ],
+            ),
+            Row(
+              children: [
+                Icon(FontAwesomeIcons.infoCircle),
+                Text(' Statut : '),
+              ],
+            ),
           ],
         ),
         Row(
@@ -122,16 +115,24 @@ class _PatientDetailsState extends State<PatientDetails> {
     );
   }
 
-  Column patientMisc() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  Row patientMisc() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Text('Poids : 98Kg'),
-            Text('Taille : 1,65m'),
+          children: [
+            Icon(FontAwesomeIcons.weightHanging),
+            Text(' Poids : 98Kg'),
+          ],
+        ),
+        Row(
+          children: [
+            Icon(FontAwesomeIcons.textHeight),
+            Text(' Taille : 1,65m'),
+          ],
+        ),
+        Row(
+          children: [
             Text('BMI : 36'),
           ],
         ),

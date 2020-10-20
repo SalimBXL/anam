@@ -1,27 +1,34 @@
-import 'package:anam/main.dart';
-import 'package:anam/screens/patient_sheet.dart';
-import 'package:flutter/material.dart';
 import 'package:anam/classes/patient.dart';
+import 'package:anam/main.dart';
+import 'package:flutter/material.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
-ListTile patientListTile(BuildContext context, Patient patient) {
-  return ListTile(
-    leading: Icon(
-      Icons.person,
-      size: 48,
-      color: patient.isMale ? Colors.blue : Colors.pink,
-    ),
-    title: patientNameLine(patient),
-    subtitle: patientDataLine(patient),
-    isThreeLine: true,
-    onTap: () {
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => PatientSheet()),
-      );
-    },
-    onLongPress: () => alertBox(context, patient).show(),
-  );
+const double iconSize = 48;
+const Color iconColorMale = Colors.blue;
+const Color iconColorFemale = Colors.pink;
+
+class PatientListTile extends StatelessWidget {
+  PatientListTile({@required this.patient});
+
+  final Patient patient;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Icon(
+        Icons.person,
+        size: iconSize,
+        color: patient.isMale ? iconColorMale : iconColorFemale,
+      ),
+      title: Text(
+        '[${patient.npp}] - ${patient.fullname}',
+      ),
+      subtitle: patientDataLine(patient),
+      isThreeLine: true,
+      onTap: () {},
+      onLongPress: () => alertBox(context, patient).show(),
+    );
+  }
 }
 
 Alert alertBox(BuildContext context, Patient patient) {
@@ -40,8 +47,6 @@ String formatTime(DateTime time) =>
 
 Row patientDataLine(Patient patient) {
   return Row(
-    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-    mainAxisSize: MainAxisSize.max,
     children: <Widget>[
       Icon(Icons.golf_course),
       Text('${formatTime(patient.accueilTime)}'),
@@ -49,24 +54,8 @@ Row patientDataLine(Patient patient) {
       Icon(Icons.healing),
       Text('${formatTime(patient.injectionTime)}'),
       Text(' - '),
-      Icon(Icons.check_box_outline_blank),
+      Icon(Icons.settings_overscan),
       Text('${formatTime(patient.cameraTime)}'),
-    ],
-  );
-}
-
-Row patientNameLine(Patient patient) {
-  return Row(
-    children: <Widget>[
-      Text(
-        '[${patient.npp}]',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      Text(' - '),
-      Text(
-        '${patient.fullname}',
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
     ],
   );
 }

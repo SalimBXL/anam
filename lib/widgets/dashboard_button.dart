@@ -1,23 +1,31 @@
 import 'package:anam/classes/patient.dart';
 import 'package:flutter/material.dart';
 
-Column dashboardButton(
-    {int listLength, Color color, Function action, PatientStatus status}) {
-  return Column(
-    children: <Widget>[
-      Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: FloatingActionButton(
-          onPressed: action,
-          child: patientStatusIcon[status],
-          backgroundColor: color,
-          foregroundColor: Colors.white,
+class DashboardButton extends StatelessWidget {
+  DashboardButton({this.listLength, this.color, this.action, this.status});
+
+  final int listLength;
+  final Color color;
+  final Function action;
+  final PatientStatus status;
+
+  Widget build(BuildContext context) {
+    return Column(
+      children: <Widget>[
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: FloatingActionButton(
+            onPressed: this.action,
+            child: patientStatusIcon[this.status],
+            backgroundColor: this.color,
+            foregroundColor: Colors.white,
+          ),
         ),
-      ),
-      Text(
-        '$listLength',
-        style: TextStyle(),
-      ),
-    ],
-  );
+        Text(
+          '${this.listLength}',
+          style: TextStyle(),
+        ),
+      ],
+    );
+  }
 }

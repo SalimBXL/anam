@@ -1,3 +1,5 @@
+import 'package:anam/widgets/button_ok.dart';
+import 'package:anam/widgets/card_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 
@@ -11,39 +13,23 @@ class Injection extends StatefulWidget {
 class _InjectionState extends State<Injection> {
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisSize: MainAxisSize.max,
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: <Widget>[
-          container(traceur()),
-          container(activity()),
-          container(hour()),
-          container(reste()),
-          container(medication()),
-          buttonOk(),
-        ],
-      ),
-    );
-  }
-
-  Expanded buttonOk() {
-    return Expanded(
-      child: Container(
-        margin: EdgeInsets.all(8),
-        child: FlatButton(
-          padding: EdgeInsets.all(8),
-          color: Colors.indigo,
-          onPressed: () {
-            // Navigate back to first route when tapped.
-          },
-          child: Text(
-            'Ok',
-            style: TextStyle(color: Colors.white),
-          ),
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Column(
+          mainAxisSize: MainAxisSize.max,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            CardBloc(content: traceur()),
+            CardBloc(content: activity()),
+            CardBloc(content: hour()),
+            CardBloc(content: reste()),
+            CardBloc(content: medication()),
+          ],
         ),
-      ),
+        ButtonOk(action: () {}),
+      ],
     );
   }
 

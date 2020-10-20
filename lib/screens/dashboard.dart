@@ -1,8 +1,8 @@
-import 'package:anam/classes/patients_of_the_day.dart';
-import 'package:flutter/material.dart';
-import 'package:anam/widgets/patients_list.dart';
-import 'package:anam/widgets/dashboard_button.dart';
 import 'package:anam/classes/patient.dart';
+import 'package:anam/classes/patients_of_the_day.dart';
+import 'package:anam/widgets/dashboard_button.dart';
+import 'package:anam/widgets/patients_list.dart';
+import 'package:flutter/material.dart';
 
 PatientsOfTheDay patients = PatientsOfTheDay();
 
@@ -29,7 +29,7 @@ class _DashboardState extends State<Dashboard> {
             mainAxisSize: MainAxisSize.max,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: <Widget>[
-              dashboardButton(
+              DashboardButton(
                 listLength: (patients
                         .getPatientsWithStatus(PatientStatus.todo)
                         .length +
@@ -45,9 +45,11 @@ class _DashboardState extends State<Dashboard> {
                 },
                 status: PatientStatus.all,
               ),
-              dashboardButton(
+              DashboardButton(
                 listLength:
-                    patients.getPatientsWithStatus(PatientStatus.todo).length,
+                patients
+                    .getPatientsWithStatus(PatientStatus.todo)
+                    .length,
                 color: patientStatusColor[PatientStatus.todo],
                 action: () {
                   setState(() {
@@ -56,9 +58,11 @@ class _DashboardState extends State<Dashboard> {
                 },
                 status: PatientStatus.todo,
               ),
-              dashboardButton(
+              DashboardButton(
                 listLength:
-                    patients.getPatientsWithStatus(PatientStatus.active).length,
+                patients
+                    .getPatientsWithStatus(PatientStatus.active)
+                    .length,
                 color: patientStatusColor[PatientStatus.active],
                 action: () {
                   setState(() {
@@ -67,10 +71,12 @@ class _DashboardState extends State<Dashboard> {
                 },
                 status: PatientStatus.active,
               ),
-              dashboardButton(
+              DashboardButton(
                 // PATIENTS DONE
                 listLength:
-                    patients.getPatientsWithStatus(PatientStatus.done).length,
+                patients
+                    .getPatientsWithStatus(PatientStatus.done)
+                    .length,
                 color: patientStatusColor[PatientStatus.done],
                 action: () {
                   setState(() {
@@ -82,7 +88,7 @@ class _DashboardState extends State<Dashboard> {
             ],
           ),
         ),
-        Expanded(child: patientsList(context, patients.statusToShow)),
+        Expanded(child: PatientList(status: patients.statusToShow)),
       ],
     );
   }

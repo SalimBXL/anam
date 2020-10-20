@@ -1,18 +1,23 @@
-import 'package:anam/screens/dashboard.dart';
-import 'package:flutter/material.dart';
 import 'package:anam/classes/patient.dart';
+import 'package:anam/screens/dashboard.dart';
 import 'package:anam/widgets/patient_list_tile.dart';
+import 'package:flutter/material.dart';
 
-// patientStatusColor[patientsList[index].status].withAlpha(50)
+const double padding = 5;
 
-ListView patientsList(BuildContext context, PatientStatus status) {
-  List<Patient> patientsList = patients.getPatientsWithStatus(status);
+class PatientList extends StatelessWidget {
+  PatientList({@required this.status});
 
-  return ListView.builder(
-    padding: const EdgeInsets.all(5),
-    itemCount: patientsList.length,
-    itemBuilder: (BuildContext context, int index) {
-      return patientListTile(context, patientsList[index]);
-    },
-  );
+  final PatientStatus status;
+
+  @override
+  Widget build(BuildContext context) {
+    List<Patient> _patientsList = patients.getPatientsWithStatus(this.status);
+    return ListView.builder(
+      padding: const EdgeInsets.all(padding),
+      itemCount: _patientsList.length,
+      itemBuilder: (BuildContext context, int index) =>
+          PatientListTile(patient: _patientsList[index]),
+    );
+  }
 }

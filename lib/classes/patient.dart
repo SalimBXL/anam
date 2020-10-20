@@ -3,9 +3,10 @@ import 'package:flutter/material.dart';
 enum PatientStatus { all, todo, active, done }
 
 Map<PatientStatus, Color> patientStatusColor = {
-  PatientStatus.todo: Color(0xFFFFC107),
-  PatientStatus.active: Color(0xFF4CAF50),
-  PatientStatus.done: Color(0xFFF44336)
+  PatientStatus.all: Colors.blue,
+  PatientStatus.todo: Colors.amber,
+  PatientStatus.active: Colors.green,
+  PatientStatus.done: Colors.red
 };
 
 Map<PatientStatus, Icon> patientStatusIcon = {
@@ -16,6 +17,12 @@ Map<PatientStatus, Icon> patientStatusIcon = {
 };
 
 class Patient {
+  Patient(this._npp, this._fullname, this._status) {
+    _npp.substring(6, 7).toUpperCase() == "M"
+        ? this._isMale = true
+        : this._isMale = false;
+  }
+
   String _npp;
   String _fullname;
   PatientStatus _status;
@@ -27,15 +34,12 @@ class Patient {
   DateTime _cameraTimeScheduled = DateTime.now();
   DateTime _cameraTimeReal;
 
-  Patient(this._npp, this._fullname, this._status) {
-    _npp.substring(6, 7).toUpperCase() == "M"
-        ? this._isMale = true
-        : this._isMale = false;
-  }
-
   String get npp => this._npp;
+
   String get fullname => this._fullname;
+
   PatientStatus get status => this._status;
+
   bool get isMale => this._isMale;
 
   DateTime get accueilTime {
