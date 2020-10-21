@@ -1,4 +1,8 @@
+import 'package:anam/screens/acquisition.dart';
+import 'package:anam/screens/dashboard.dart';
+import 'package:anam/screens/injection.dart';
 import 'package:anam/screens/patient_details.dart';
+import 'package:anam/screens/patient_sheet.dart';
 import 'package:anam/widgets/title_section.dart';
 import 'package:flutter/material.dart';
 
@@ -38,10 +42,11 @@ class Anam extends StatelessWidget {
         body: SafeArea(
           child: Padding(
             padding: EdgeInsets.all(0),
-            //child: Dashboard(),
+            child: Dashboard(),
             //child: PatientSheet(),
-            child: PatientDetails(),
+            //child: PatientDetails(),
             //child: Injection(),
+            //child: Acquisition(),
           ),
         ),
       ),

@@ -1,4 +1,7 @@
+import 'package:anam/classes/acquisition.dart';
 import 'package:flutter/material.dart';
+
+import 'injection.dart';
 
 enum PatientStatus { all, todo, active, done }
 
@@ -21,17 +24,26 @@ class Patient {
     _npp.substring(6, 7).toUpperCase() == "M"
         ? this._isMale = true
         : this._isMale = false;
+    this._injection = Injection("FDG-F18", 120, DateTime.now(), 60);
+    this._acquisition = Acquisition(
+        "VEREOS",
+        this
+            ._injection
+            .injectionScheduled
+            .add(Duration(minutes: this._injection.length)),
+        15);
   }
 
+  Injection _injection;
+  Acquisition _acquisition;
   String _npp;
   String _fullname;
   PatientStatus _status;
   bool _isMale;
-  DateTime _injectionTimeScheduled = DateTime.now();
-  DateTime _injectionTimeReal;
-  DateTime _accueilTimeScheduled = DateTime.now();
+
+  DateTime _accueilTimeScheduled;
   DateTime _accueilTimeReal;
-  DateTime _cameraTimeScheduled = DateTime.now();
+  DateTime _cameraTimeScheduled;
   DateTime _cameraTimeReal;
 
   String get npp => this._npp;
@@ -48,12 +60,6 @@ class Patient {
         : this._accueilTimeReal;
   }
 
-  DateTime get injectionTime {
-    return this._injectionTimeReal == null
-        ? this._injectionTimeScheduled
-        : this._injectionTimeReal;
-  }
-
   DateTime get cameraTime {
     return this._cameraTimeReal == null
         ? this._cameraTimeScheduled
@@ -61,4 +67,8 @@ class Patient {
   }
 
   set status(PatientStatus newStatus) => this._status = newStatus;
+
+  Injection get injection => this._injection;
+
+  Acquisition get acquisition => this._acquisition;
 }

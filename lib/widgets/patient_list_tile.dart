@@ -1,6 +1,8 @@
 import 'package:anam/classes/patient.dart';
 import 'package:anam/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:rflutter_alert/rflutter_alert.dart';
 
 const double iconSize = 48;
@@ -36,9 +38,9 @@ Alert alertBox(BuildContext context, Patient patient) {
     context: context,
     title: "${patient.fullname}",
     desc: "[${patient.npp}]\n\n"
-        "Wanted Time : ${formatTime(patient.accueilTime)} \n"
-        "Injection Time : ${formatTime(patient.injectionTime)} \n"
-        "Camera Time : ${formatTime(patient.cameraTime)} \n",
+        "Wanted Time :  \n"
+        "Injection Time : \n"
+        "Camera Time :  \n",
   );
 }
 
@@ -47,15 +49,79 @@ String formatTime(DateTime time) =>
 
 Row patientDataLine(Patient patient) {
   return Row(
+    mainAxisAlignment: MainAxisAlignment.spaceBetween,
     children: <Widget>[
-      Icon(Icons.golf_course),
-      Text('${formatTime(patient.accueilTime)}'),
+      Row(
+        children: [
+          Icon(Icons.golf_course),
+          textAccueilValue(patient),
+        ],
+      ),
       Text(' - '),
-      Icon(Icons.healing),
-      Text('${formatTime(patient.injectionTime)}'),
+      Row(
+        children: [
+          Icon(FontAwesomeIcons.syringe),
+          textInjectionValue(patient),
+        ],
+      ),
       Text(' - '),
-      Icon(Icons.settings_overscan),
-      Text('${formatTime(patient.cameraTime)}'),
+      Row(
+        children: [
+          Icon(FontAwesomeIcons.radiationAlt),
+          textAcquisitionValue(patient),
+        ],
+      ),
     ],
+  );
+}
+
+Text textAccueilValue(Patient patient) {
+  TextStyle style;
+  String value;
+  if (patient.injection.injectionReal == null ||
+      patient.injection.injectionReal.toString().length < 3) {
+    value = formatTime(patient.injection.injectionScheduled);
+    style = TextStyle(fontStyle: FontStyle.italic);
+  } else {
+    value = formatTime(patient.injection.injectionReal);
+    style = TextStyle(fontStyle: FontStyle.normal);
+  }
+  return Text(
+    value,
+    style: style,
+  );
+}
+
+Text textInjectionValue(Patient patient) {
+  TextStyle style;
+  String value;
+  if (patient.injection.injectionReal == null ||
+      patient.injection.injectionReal.toString().length < 3) {
+    value = formatTime(patient.injection.injectionScheduled);
+    style = TextStyle(fontStyle: FontStyle.italic);
+  } else {
+    value = formatTime(patient.injection.injectionReal);
+    style = TextStyle(fontStyle: FontStyle.normal);
+  }
+  return Text(
+    value,
+    style: style,
+  );
+}
+
+Text textAcquisitionValue(Patient patient) {
+  TextStyle style;
+  String value;
+  if (patient.acquisition.timeReal == null ||
+      patient.acquisition.timeReal.toString().length < 3) {
+    value = formatTime(patient.acquisition.timeScheduled);
+    style = TextStyle(fontStyle: FontStyle.italic);
+  } else {
+    value = formatTime(patient.acquisition.timeReal);
+    style = TextStyle(fontStyle: FontStyle.normal);
+  }
+  return Text(
+    value,
+    style: style,
   );
 }

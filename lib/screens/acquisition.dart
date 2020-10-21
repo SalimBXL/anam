@@ -4,14 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class Injection extends StatefulWidget {
-  Injection({Key key}) : super(key: key);
+class Acquisition extends StatefulWidget {
+  Acquisition({Key key}) : super(key: key);
 
   @override
-  _InjectionState createState() => _InjectionState();
+  _AcquisitionState createState() => _AcquisitionState();
 }
 
-class _InjectionState extends State<Injection> {
+class _AcquisitionState extends State<Acquisition> {
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -27,19 +27,29 @@ class _InjectionState extends State<Injection> {
               children: [
                 CardBloc(
                   content: Icon(
-                    FontAwesomeIcons.syringe,
+                    FontAwesomeIcons.radiationAlt,
                     color: Colors.pink,
                     size: 30,
                   ),
                 ),
-                CardBloc(content: traceur()),
+                CardBloc(content: camera()),
                 Expanded(child: CardBloc(content: patient())),
               ],
             ),
-            CardBloc(content: activity()),
-            CardBloc(content: hour()),
+            CardBloc(content: acquisitionDetails()),
+            CardBloc(content: start()),
             CardBloc(content: reste()),
-            CardBloc(content: medication()),
+            CardBloc(content: nurse()),
+            CardBloc(
+              content: Text(
+                'NOTE : bgyhzgejhfgejh gyezgj hgezy'
+                ' ejz yuzgf jhzg  yzgefj juejyfgzejy'
+                'fygjyfgjhg FG FGJ',
+                softWrap: true,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 3,
+              ),
+            ),
           ],
         ),
         ButtonOk(action: () {}),
@@ -61,61 +71,55 @@ class _InjectionState extends State<Injection> {
     );
   }
 
-  Row activity() {
+  Row acquisitionDetails() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Activité prévue : '),
-            Text('Activité Réelle : '),
+            Text('Entrée prévue : '),
+            Text('Durée prévue : '),
           ],
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Text('120.0 MBq'),
-            Text('126.2 MBq'),
+            Text('10:05'),
+            Text('15'),
           ],
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             Text(' '),
-            Text(' à 05:56'),
+            Text('minute(s)'),
           ],
         )
       ],
     );
   }
 
-  Row medication() {
+  Row nurse() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Glycémie : '),
-            Text('Insuline : '),
-            Text('Autre : '),
+            Text('Acquisition lancée par : '),
           ],
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
             Text(''),
-            Text('Qté : '),
-            Text(' '),
           ],
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Text('88 mg/dl'),
-            Text('  '),
-            Text('  '),
+            Text('K.L'),
           ],
         )
       ],
@@ -129,63 +133,67 @@ class _InjectionState extends State<Injection> {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Text('Reste : '),
-            Text('Dose appréciée : '),
-            Text('Injection réalisée par : ')
+            Text('Coincidence : '),
+            Text('Singles : '),
           ],
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Text(' MBq'),
-            Text('126.2 MBq'),
-            Text(' '),
+            Text('71746'),
+            Text('5.19'),
           ],
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[
-            Text(' '),
-            Text(' '),
-            Text('[J.R.]'),
+            Text('count/sec'),
+            Text('(10^6)'),
           ],
         )
       ],
     );
   }
 
-  Column hour() {
-    return Column(
+  Row start() {
+    return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: <Widget>[
-                Text('Heure injection prévue : '),
-                Text('IV : '),
-              ],
-            ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.end,
-              children: <Widget>[
-                Text('09:20'),
-                Text('09:56'),
-              ],
+            Text(
+              'PET démarré à :',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ],
         ),
-        Text('Localisation : B. Dr.'),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            Text(
+              '10:20',
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: <Widget>[
+            Text(' '),
+          ],
+        )
       ],
     );
   }
 
-  Text traceur() {
+  Text camera() {
     return Text(
-      'FDG-F18',
+      'VEREOS',
       textAlign: TextAlign.center,
       style: TextStyle(
         fontWeight: FontWeight.bold,
