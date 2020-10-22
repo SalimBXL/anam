@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'injection.dart';
 
 enum PatientStatus { all, todo, active, done }
+enum Sex { male, female }
 
 Map<PatientStatus, Color> patientStatusColor = {
   PatientStatus.all: Colors.blue,
@@ -22,8 +23,8 @@ Map<PatientStatus, Icon> patientStatusIcon = {
 class Patient {
   Patient(this._npp, this._fullname, this._status) {
     _npp.substring(6, 7).toUpperCase() == "M"
-        ? this._isMale = true
-        : this._isMale = false;
+        ? this._sex = Sex.male
+        : this._sex = Sex.female;
     this._injection = Injection("FDG-F18", 120, DateTime.now(), 60);
     this._acquisition = Acquisition(
         "VEREOS",
@@ -39,7 +40,7 @@ class Patient {
   String _npp;
   String _fullname;
   PatientStatus _status;
-  bool _isMale;
+  Sex _sex;
 
   DateTime _accueilTimeScheduled;
   DateTime _accueilTimeReal;
@@ -52,7 +53,9 @@ class Patient {
 
   PatientStatus get status => this._status;
 
-  bool get isMale => this._isMale;
+  Sex get sex => this._sex;
+
+  bool get isFemale => (this._sex == Sex.female);
 
   DateTime get accueilTime {
     return this._accueilTimeReal == null

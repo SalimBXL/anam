@@ -22,7 +22,7 @@ class PatientListTile extends StatelessWidget {
       leading: Icon(
         Icons.person,
         size: iconSize,
-        color: patient.isMale ? iconColorMale : iconColorFemale,
+        color: patient.isFemale ? iconColorFemale : iconColorMale,
       ),
       title: Text(
         patient.fullname,
