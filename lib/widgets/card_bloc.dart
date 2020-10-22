@@ -17,7 +17,8 @@ class CardBloc extends StatelessWidget {
         borderRadius: BorderRadius.circular(roundBorderRadius),
         color: backgroundColor,
       ),
-      margin: EdgeInsets.all(externalSpace),
+      margin: EdgeInsets.symmetric(
+          horizontal: externalSpace, vertical: externalSpace / 2),
       padding: EdgeInsets.all(internalSpace),
       child: this.content,
     );

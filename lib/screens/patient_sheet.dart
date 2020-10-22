@@ -1,5 +1,6 @@
 import 'package:anam/widgets/button_ok.dart';
 import 'package:anam/widgets/card_bloc.dart';
+import 'package:anam/widgets/patient_name_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -25,18 +26,40 @@ class _PatientSheetState extends State<PatientSheet> {
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
             CardBloc(
-                content:
-                    cardContent(icon: Icons.account_box, text: 'Patient data')),
-            CardBloc(
-                content: cardContent(
-                    icon: FontAwesomeIcons.fileMedical, text: 'questions')),
-            CardBloc(
-                content: cardContent(
-                    icon: FontAwesomeIcons.syringe, text: 'injection')),
-            CardBloc(
-                content: cardContent(
-                    icon: FontAwesomeIcons.radiationAlt, text: 'aquisition')),
-            CardBloc(content: cardContent(icon: Icons.info, text: 'misc')),
+                content: PatientNameBloc(
+              nomPatient: 'SEVINDIK Evrim',
+              nppPatient: '041220FD05',
+            )),
+            GestureDetector(
+              onTap: () {},
+              child: CardBloc(
+                  content: cardContent(
+                      icon: Icons.account_box, text: 'Patient data')),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: CardBloc(
+                  content: cardContent(
+                      icon: FontAwesomeIcons.fileMedical, text: 'questions')),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: CardBloc(
+                  content: cardContent(
+                      icon: FontAwesomeIcons.syringe, text: 'injection')),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: CardBloc(
+                  content: cardContent(
+                      icon: FontAwesomeIcons.radiationAlt, text: 'aquisition')),
+            ),
+            GestureDetector(
+              onTap: () {},
+              child: CardBloc(
+                content: cardContent(icon: Icons.info, text: 'misc'),
+              ),
+            ),
           ],
         ),
         ButtonOk(action: () {}),

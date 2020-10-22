@@ -1,5 +1,6 @@
 import 'package:anam/widgets/button_ok.dart';
 import 'package:anam/widgets/card_bloc.dart';
+import 'package:anam/widgets/patient_name_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,19 +23,23 @@ class _AcquisitionState extends State<Acquisition> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                CardBloc(
-                  content: Icon(
+            CardBloc(
+                content: PatientNameBloc(
+              nomPatient: 'SEVINDIK Evrim',
+              nppPatient: '041220FD05',
+            )),
+            CardBloc(
+              content: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Icon(
                     FontAwesomeIcons.radiationAlt,
-                    color: Colors.pink,
+                    color: Colors.purple,
                     size: 30,
                   ),
-                ),
-                CardBloc(content: camera()),
-                Expanded(child: CardBloc(content: patient())),
-              ],
+                  camera(),
+                ],
+              ),
             ),
             CardBloc(content: acquisitionDetails()),
             CardBloc(content: start()),

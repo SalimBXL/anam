@@ -34,7 +34,7 @@ class Anam extends StatelessWidget {
           title: TitleSection(title: 'Titre'),
           elevation: 0.0,
           actions: <Widget>[
-            Icon(Icons.notifications),
+            Icon(Icons.list_alt),
             Icon(Icons.notifications_none),
             Icon(Icons.notifications_off),
           ],

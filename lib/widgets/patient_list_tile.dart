@@ -17,13 +17,19 @@ class PatientListTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
+      contentPadding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+      tileColor: patientStatusColor[patient.status].withOpacity(0.5),
       leading: Icon(
         Icons.person,
         size: iconSize,
         color: patient.isMale ? iconColorMale : iconColorFemale,
       ),
       title: Text(
-        '[${patient.npp}] - ${patient.fullname}',
+        patient.fullname,
+        style: TextStyle(
+          fontSize: iconSize / 2.5,
+          fontWeight: FontWeight.bold,
+        ),
       ),
       subtitle: patientDataLine(patient),
       isThreeLine: true,
@@ -37,7 +43,7 @@ Alert alertBox(BuildContext context, Patient patient) {
   return Alert(
     context: context,
     title: "${patient.fullname}",
-    desc: "[${patient.npp}]\n\n"
+    desc: "[${patient.npp}]\n"
         "Wanted Time :  \n"
         "Injection Time : \n"
         "Camera Time :  \n",

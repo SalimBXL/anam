@@ -1,5 +1,6 @@
 import 'package:anam/widgets/button_ok.dart';
 import 'package:anam/widgets/card_bloc.dart';
+import 'package:anam/widgets/patient_name_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -22,7 +23,11 @@ class _PatientDetailsState extends State<PatientDetails> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
-            CardBloc(content: patientName()),
+            CardBloc(
+                content: PatientNameBloc(
+              nomPatient: 'SEVINDIK Evrim',
+              nppPatient: '041220FD05',
+            )),
             CardBloc(content: ambu()),
             CardBloc(content: patientMisc()),
             CardBloc(content: annotation()),
@@ -48,37 +53,6 @@ class _PatientDetailsState extends State<PatientDetails> {
             maxLines: 3,
           ),
         ),
-      ],
-    );
-  }
-
-  Row patientName() {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      children: <Widget>[
-        Icon(
-          Icons.account_box,
-          color: Colors.pink,
-          size: 70,
-        ),
-        Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Row(
-              children: <Widget>[
-                Text(
-                  'SEVINDIK Evrim',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
-                ),
-              ],
-            ),
-            Text('[NPP 041220FD05]'),
-          ],
-        )
       ],
     );
   }
