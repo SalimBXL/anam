@@ -1,8 +1,8 @@
-import 'package:anam/classes/patient.dart';
 import 'package:anam/classes/patients_of_the_day.dart';
-import 'package:anam/widgets/dashboard_button.dart';
 import 'package:anam/widgets/patients_list.dart';
 import 'package:flutter/material.dart';
+import 'package:anam/classes/patient.dart';
+import 'package:anam/widgets/dashboard_button.dart';
 
 PatientsOfTheDay patients = PatientsOfTheDay();
 
