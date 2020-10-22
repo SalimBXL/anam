@@ -2,11 +2,12 @@ import 'package:anam/widgets/button_ok.dart';
 import 'package:anam/widgets/card_bloc.dart';
 import 'package:anam/widgets/patient_name_bloc.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class PatientDetails extends StatefulWidget {
   PatientDetails({Key key}) : super(key: key);
+
+  final String pageName = 'patientDetails';
 
   @override
   _PatientDetailsState createState() => _PatientDetailsState();
@@ -15,26 +16,35 @@ class PatientDetails extends StatefulWidget {
 class _PatientDetailsState extends State<PatientDetails> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            CardBloc(
-                content: PatientNameBloc(
-              nomPatient: 'SEVINDIK Evrim',
-              nppPatient: '041220FD05',
-            )),
-            CardBloc(content: ambu()),
-            CardBloc(content: patientMisc()),
-            CardBloc(content: annotation()),
-          ],
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  CardBloc(
+                      child: PatientNameBloc(
+                    nomPatient: 'SEVINDIK Evrim',
+                    nppPatient: '041220FD05',
+                  )),
+                  CardBloc(child: ambu()),
+                  CardBloc(child: patientMisc()),
+                  CardBloc(child: annotation()),
+                ],
+              ),
+              ButtonOk(action: () {
+                Navigator.pop(context);
+              }),
+            ],
+          ),
         ),
-        ButtonOk(action: () {}),
-      ],
+      ),
     );
   }
 

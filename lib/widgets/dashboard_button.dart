@@ -1,24 +1,24 @@
-import 'package:anam/classes/patient.dart';
+import 'package:anam/widgets/card_bloc.dart';
 import 'package:flutter/material.dart';
 
 class DashboardButton extends StatelessWidget {
-  DashboardButton({this.listLength, this.color, this.action, this.status});
+  DashboardButton({this.listLength, this.color, this.action, this.statusIcon});
 
   final int listLength;
   final Color color;
   final Function action;
-  final PatientStatus status;
+  final IconData statusIcon;
 
   Widget build(BuildContext context) {
     return Column(
-      children: <Widget>[
-        Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: FloatingActionButton(
-            onPressed: this.action,
-            child: patientStatusIcon[this.status],
-            backgroundColor: this.color,
-            foregroundColor: Colors.white,
+      children: [
+        CardBloc(
+          color: this.color,
+          //onPressed: this.action,
+          child: Icon(
+            this.statusIcon,
+            color: Colors.white,
+            size: 40,
           ),
         ),
         Text(

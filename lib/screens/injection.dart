@@ -8,6 +8,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class Injection extends StatefulWidget {
   Injection({Key key}) : super(key: key);
 
+  final String pageName = 'injection';
+
   @override
   _InjectionState createState() => _InjectionState();
 }
@@ -15,40 +17,49 @@ class Injection extends StatefulWidget {
 class _InjectionState extends State<Injection> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            CardBloc(
-                content: PatientNameBloc(
-              nomPatient: 'SEVINDIK Evrim',
-              nppPatient: '041220FD05',
-            )),
-            CardBloc(
-              content: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Icon(
-                    FontAwesomeIcons.syringe,
-                    color: Colors.purple,
-                    size: 30,
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  CardBloc(
+                      child: PatientNameBloc(
+                    nomPatient: 'SEVINDIK Evrim',
+                    nppPatient: '041220FD05',
+                  )),
+                  CardBloc(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(
+                          FontAwesomeIcons.syringe,
+                          color: Colors.purple,
+                          size: 30,
+                        ),
+                        traceur(),
+                      ],
+                    ),
                   ),
-                  traceur(),
+                  CardBloc(child: activity()),
+                  CardBloc(child: hour()),
+                  CardBloc(child: reste()),
+                  CardBloc(child: medication()),
                 ],
               ),
-            ),
-            CardBloc(content: activity()),
-            CardBloc(content: hour()),
-            CardBloc(content: reste()),
-            CardBloc(content: medication()),
-          ],
+              ButtonOk(action: () {
+                Navigator.pop(context);
+              }),
+            ],
+          ),
         ),
-        ButtonOk(action: () {}),
-      ],
+      ),
     );
   }
 

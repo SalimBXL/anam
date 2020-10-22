@@ -1,24 +1,8 @@
 import 'package:anam/classes/acquisition.dart';
-import 'package:flutter/material.dart';
-
 import 'injection.dart';
 
 enum PatientStatus { all, todo, active, done }
 enum Sex { male, female }
-
-Map<PatientStatus, Color> patientStatusColor = {
-  PatientStatus.all: Colors.blue,
-  PatientStatus.todo: Colors.amber,
-  PatientStatus.active: Colors.green,
-  PatientStatus.done: Colors.red
-};
-
-Map<PatientStatus, Icon> patientStatusIcon = {
-  PatientStatus.all: Icon(Icons.people),
-  PatientStatus.todo: Icon(Icons.hourglass_full),
-  PatientStatus.active: Icon(Icons.healing),
-  PatientStatus.done: Icon(Icons.done),
-};
 
 class Patient {
   Patient(this._npp, this._fullname, this._status) {

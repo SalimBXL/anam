@@ -35,7 +35,7 @@ class PatientNameBloc extends StatelessWidget {
                 ),
               ],
             ),
-            Text(this.nppPatient),
+            Text('[${this.nppPatient}]'),
           ],
         )
       ],

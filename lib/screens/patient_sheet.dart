@@ -12,6 +12,8 @@ const double fontSize = 20;
 class PatientSheet extends StatefulWidget {
   PatientSheet({Key key}) : super(key: key);
 
+  final String pageName = 'patientSheet';
+
   @override
   _PatientSheetState createState() => _PatientSheetState();
 }
@@ -19,51 +21,63 @@ class PatientSheet extends StatefulWidget {
 class _PatientSheetState extends State<PatientSheet> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: <Widget>[
-            CardBloc(
-                content: PatientNameBloc(
-              nomPatient: 'SEVINDIK Evrim',
-              nppPatient: '041220FD05',
-            )),
-            GestureDetector(
-              onTap: () {},
-              child: CardBloc(
-                  content: cardContent(
-                      icon: Icons.account_box, text: 'Patient data')),
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: CardBloc(
-                  content: cardContent(
-                      icon: FontAwesomeIcons.fileMedical, text: 'questions')),
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: CardBloc(
-                  content: cardContent(
-                      icon: FontAwesomeIcons.syringe, text: 'injection')),
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: CardBloc(
-                  content: cardContent(
-                      icon: FontAwesomeIcons.radiationAlt, text: 'aquisition')),
-            ),
-            GestureDetector(
-              onTap: () {},
-              child: CardBloc(
-                content: cardContent(icon: Icons.info, text: 'misc'),
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: <Widget>[
+                  CardBloc(
+                    child: PatientNameBloc(
+                      nomPatient: 'SEVINDIK Evrim',
+                      nppPatient: '[041220FD05]',
+                    ),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: CardBloc(
+                        child: cardContent(
+                            icon: Icons.account_box, text: 'Patient data')),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: CardBloc(
+                        child: cardContent(
+                            icon: FontAwesomeIcons.fileMedical,
+                            text: 'questions')),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: CardBloc(
+                        child: cardContent(
+                            icon: FontAwesomeIcons.syringe, text: 'injection')),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: CardBloc(
+                        child: cardContent(
+                            icon: FontAwesomeIcons.radiationAlt,
+                            text: 'aquisition')),
+                  ),
+                  GestureDetector(
+                    onTap: () {},
+                    child: CardBloc(
+                      child: cardContent(icon: Icons.info, text: 'misc'),
+                    ),
+                  ),
+                ],
               ),
-            ),
-          ],
+              ButtonOk(action: () {
+                Navigator.pop(context);
+              }),
+            ],
+          ),
         ),
-        ButtonOk(action: () {}),
-      ],
+      ),
     );
   }
 

@@ -8,6 +8,8 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class Acquisition extends StatefulWidget {
   Acquisition({Key key}) : super(key: key);
 
+  final String pageName = 'acquisition';
+
   @override
   _AcquisitionState createState() => _AcquisitionState();
 }
@@ -15,50 +17,59 @@ class Acquisition extends StatefulWidget {
 class _AcquisitionState extends State<Acquisition> {
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
-        Column(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget>[
-            CardBloc(
-                content: PatientNameBloc(
-              nomPatient: 'SEVINDIK Evrim',
-              nppPatient: '041220FD05',
-            )),
-            CardBloc(
-              content: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Icon(
-                    FontAwesomeIcons.radiationAlt,
-                    color: Colors.purple,
-                    size: 30,
+    return Scaffold(
+      body: SafeArea(
+        child: Padding(
+          padding: EdgeInsets.all(0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Column(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: <Widget>[
+                  CardBloc(
+                      child: PatientNameBloc(
+                    nomPatient: 'SEVINDIK Evrim',
+                    nppPatient: '041220FD05',
+                  )),
+                  CardBloc(
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(
+                          FontAwesomeIcons.radiationAlt,
+                          color: Colors.purple,
+                          size: 30,
+                        ),
+                        camera(),
+                      ],
+                    ),
                   ),
-                  camera(),
+                  CardBloc(child: acquisitionDetails()),
+                  CardBloc(child: start()),
+                  CardBloc(child: reste()),
+                  CardBloc(child: nurse()),
+                  CardBloc(
+                    child: Text(
+                      'NOTE : bgyhzgejhfgejh gyezgj hgezy'
+                      ' ejz yuzgf jhzg  yzgefj juejyfgzejy'
+                      'fygjyfgjhg FG FGJ',
+                      softWrap: true,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 3,
+                    ),
+                  ),
                 ],
               ),
-            ),
-            CardBloc(content: acquisitionDetails()),
-            CardBloc(content: start()),
-            CardBloc(content: reste()),
-            CardBloc(content: nurse()),
-            CardBloc(
-              content: Text(
-                'NOTE : bgyhzgejhfgejh gyezgj hgezy'
-                ' ejz yuzgf jhzg  yzgefj juejyfgzejy'
-                'fygjyfgjhg FG FGJ',
-                softWrap: true,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 3,
-              ),
-            ),
-          ],
+              ButtonOk(action: () {
+                Navigator.pop(context);
+              }),
+            ],
+          ),
         ),
-        ButtonOk(action: () {}),
-      ],
+      ),
     );
   }
 

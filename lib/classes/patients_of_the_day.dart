@@ -4,8 +4,8 @@ class PatientsOfTheDay {
   PatientStatus _statusToShow = PatientStatus.all;
 
   List<Patient> _patients = [
-    Patient("770324MJ03", "Salim A. JOLY", PatientStatus.todo),
-    Patient("770324FJ03", "Salim A. JOLY", PatientStatus.todo),
+    Patient("770324MJ03", "JOLY Joly", PatientStatus.todo),
+    Patient("041220FD05", "SEVINDIK Evrim", PatientStatus.active),
     Patient("770324FJ03", "Salim A. JOLY", PatientStatus.todo),
     Patient("770324FJ03", "Salim A. JOLY", PatientStatus.todo),
     Patient("770324MJ03", "Salim A. JOLY", PatientStatus.todo),
