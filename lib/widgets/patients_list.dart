@@ -20,11 +20,18 @@ class PatientList extends StatelessWidget {
         itemBuilder: (BuildContext context, int index) {
           return GestureDetector(
             onTap: () {
-              //Navigator.pushNamed(context, '/${PatientSheet().pageName}');
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) =>
+                      PatientSheet(patient: _patientsList[index]),
+                ),
+              );
             },
             child: PatientNameBloc(
               nomPatient: _patientsList[index].fullname,
               nppPatient: _patientsList[index].npp,
+              statusPatientIcon: patientStatusIcon[_patientsList[index].status],
             ),
           );
         });

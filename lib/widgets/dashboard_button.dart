@@ -12,13 +12,16 @@ class DashboardButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        CardBloc(
-          color: this.color,
-          //onPressed: this.action,
-          child: Icon(
-            this.statusIcon,
-            color: Colors.white,
-            size: 40,
+        GestureDetector(
+          onTap: action,
+          child: CardBloc(
+            color: this.color,
+            //onPressed: this.action,
+            child: Icon(
+              this.statusIcon,
+              color: Colors.white,
+              size: 40,
+            ),
           ),
         ),
         Text(

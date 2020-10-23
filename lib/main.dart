@@ -17,11 +17,11 @@ class Anam extends StatelessWidget {
       theme: theme(),
       initialRoute: '/dashboard',
       routes: {
-        '/${Dashboard().pageName}': (context) => Dashboard(),
-        '/${PatientSheet().pageName}': (context) => PatientSheet(),
-        '/${PatientDetails().pageName}': (context) => PatientDetails(),
-        '/${Injection().pageName}': (context) => Injection(),
-        '/${Acquisition().pageName}': (context) => Acquisition(),
+        '/dashboard': (context) => Dashboard(),
+        '/patientSheet': (context) => PatientSheet(patient: null),
+        '/patientDetails': (context) => PatientDetails(),
+        '/injection': (context) => Injection(),
+        '/acquisition': (context) => Acquisition(),
       },
     );
   }

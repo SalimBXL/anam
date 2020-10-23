@@ -1,3 +1,5 @@
+import 'package:anam/classes/patient.dart';
+import 'package:anam/screens/dashboard.dart';
 import 'package:anam/widgets/button_ok.dart';
 import 'package:anam/widgets/card_bloc.dart';
 import 'package:anam/widgets/patient_name_bloc.dart';
@@ -9,16 +11,12 @@ const double iconSize = 48;
 const Color iconColor = Colors.purple;
 const double fontSize = 20;
 
-class PatientSheet extends StatefulWidget {
-  PatientSheet({Key key}) : super(key: key);
+class PatientSheet extends StatelessWidget {
+  PatientSheet({@required this.patient});
 
+  final Patient patient;
   final String pageName = 'patientSheet';
 
-  @override
-  _PatientSheetState createState() => _PatientSheetState();
-}
-
-class _PatientSheetState extends State<PatientSheet> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,8 +31,9 @@ class _PatientSheetState extends State<PatientSheet> {
                 children: <Widget>[
                   CardBloc(
                     child: PatientNameBloc(
-                      nomPatient: 'SEVINDIK Evrim',
-                      nppPatient: '[041220FD05]',
+                      nomPatient: patient.fullname,
+                      nppPatient: patient.npp,
+                      statusPatientIcon: patientStatusIcon[patient.status],
                     ),
                   ),
                   GestureDetector(
