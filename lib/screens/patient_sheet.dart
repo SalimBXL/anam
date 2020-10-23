@@ -1,5 +1,7 @@
 import 'package:anam/classes/patient.dart';
+import 'package:anam/screens/acquisition.dart';
 import 'package:anam/screens/dashboard.dart';
+import 'package:anam/screens/patient_details.dart';
 import 'package:anam/widgets/button_ok.dart';
 import 'package:anam/widgets/card_bloc.dart';
 import 'package:anam/widgets/patient_name_bloc.dart';
@@ -7,9 +9,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'injection.dart';
+
 const double iconSize = 48;
 const Color iconColor = Colors.purple;
-const double fontSize = 20;
+const double fontSize = 16;
 
 class PatientSheet extends StatelessWidget {
   PatientSheet({@required this.patient});
@@ -37,26 +41,56 @@ class PatientSheet extends StatelessWidget {
                     ),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              PatientDetails(patient: patient),
+                        ),
+                      );
+                    },
                     child: CardBloc(
                         child: cardContent(
-                            icon: Icons.account_box, text: 'Patient data')),
+                            icon: Icons.account_box, text: 'Données patient')),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              PatientDetails(patient: patient),
+                        ),
+                      );
+                    },
                     child: CardBloc(
                         child: cardContent(
                             icon: FontAwesomeIcons.fileMedical,
                             text: 'questions')),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Injection(patient: patient),
+                        ),
+                      );
+                    },
                     child: CardBloc(
                         child: cardContent(
                             icon: FontAwesomeIcons.syringe, text: 'injection')),
                   ),
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => Acquisition(patient: patient),
+                        ),
+                      );
+                    },
                     child: CardBloc(
                         child: cardContent(
                             icon: FontAwesomeIcons.radiationAlt,

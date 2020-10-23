@@ -1,5 +1,3 @@
-import 'package:anam/classes/patient.dart';
-import 'package:anam/screens/dashboard.dart';
 import 'package:flutter/material.dart';
 
 const double iconSize = 54;

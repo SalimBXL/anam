@@ -1,19 +1,36 @@
+import 'package:anam/classes/patient.dart';
 import 'package:anam/widgets/button_ok.dart';
 import 'package:anam/widgets/card_bloc.dart';
 import 'package:anam/widgets/patient_name_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+const double iconSize = 30;
+const double bigTextSize = 16;
+
 class PatientDetails extends StatefulWidget {
-  PatientDetails({Key key}) : super(key: key);
+  PatientDetails({@required this.patient});
 
   final String pageName = 'patientDetails';
+  final Patient patient;
 
   @override
   _PatientDetailsState createState() => _PatientDetailsState();
 }
 
 class _PatientDetailsState extends State<PatientDetails> {
+  Patient patient;
+
+  @override
+  void initState() {
+    super.initState();
+    updateUI(widget.patient);
+  }
+
+  void updateUI(Patient p) {
+    patient = p;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -30,9 +47,10 @@ class _PatientDetailsState extends State<PatientDetails> {
                 children: <Widget>[
                   CardBloc(
                       child: PatientNameBloc(
-                    nomPatient: 'SEVINDIK Evrim',
-                    nppPatient: '041220FD05',
+                    nomPatient: patient.fullname,
+                    nppPatient: patient.npp,
                   )),
+                  CardBloc(child: patientInfo()),
                   CardBloc(child: ambu()),
                   CardBloc(child: patientMisc()),
                   CardBloc(child: annotation()),
@@ -48,13 +66,45 @@ class _PatientDetailsState extends State<PatientDetails> {
     );
   }
 
+  Row patientInfo() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                Icons.account_box,
+                color: Colors.purple,
+                size: iconSize,
+              ),
+            ),
+            Text(
+              'Données patient'.toUpperCase(),
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: bigTextSize,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
   Row annotation() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       mainAxisSize: MainAxisSize.max,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Icon(FontAwesomeIcons.notesMedical),
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(FontAwesomeIcons.notesMedical),
+        ),
         Expanded(
           child: Text(
             'hufheuhfjkhdjvhrukqhkhwjfhdwhd, bnnjfdqkhkjn jrqhc gheqkghrc, gq, iljk, hj khfjnhbjn jkbwfdjkbk',
@@ -67,32 +117,35 @@ class _PatientDetailsState extends State<PatientDetails> {
     );
   }
 
-  Column ambu() {
-    return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+  Row ambu() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
         Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: <Widget>[
-            Row(
-              children: [
-                Icon(FontAwesomeIcons.male),
-                Text(' Age : 16 ans'),
-              ],
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(FontAwesomeIcons.male),
             ),
-            Row(
-              children: [
-                Icon(FontAwesomeIcons.infoCircle),
-                Text(' Statut : '),
-              ],
-            ),
+            Text(' Age : ${patient.age} ans'),
           ],
         ),
         Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text('Ambu'),
-            Text('Hospi'),
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(FontAwesomeIcons.infoCircle),
+            ),
+            Text(' Statut : '),
+          ],
+        ),
+        Row(
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(FontAwesomeIcons.ambulance),
+            ),
+            Text(' Ambu : '),
           ],
         ),
       ],
@@ -105,19 +158,30 @@ class _PatientDetailsState extends State<PatientDetails> {
       children: <Widget>[
         Row(
           children: [
-            Icon(FontAwesomeIcons.weightHanging),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(FontAwesomeIcons.weightHanging),
+            ),
             Text(' Poids : 98Kg'),
           ],
         ),
         Row(
           children: [
-            Icon(FontAwesomeIcons.textHeight),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(FontAwesomeIcons.textHeight),
+            ),
             Text(' Taille : 1,65m'),
           ],
         ),
         Row(
           children: [
-            Text('BMI : 36'),
+            Text(
+              'BMI : ',
+              style:
+              TextStyle(fontWeight: FontWeight.bold, fontSize: bigTextSize),
+            ),
+            Text('36'),
           ],
         ),
       ],

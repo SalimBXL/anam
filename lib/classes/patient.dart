@@ -1,4 +1,5 @@
 import 'package:anam/classes/acquisition.dart';
+
 import 'injection.dart';
 
 enum PatientStatus { all, todo, active, done }
@@ -58,4 +59,18 @@ class Patient {
   Injection get injection => this._injection;
 
   Acquisition get acquisition => this._acquisition;
+
+  int get age {
+    int annee = int.parse(this._npp.substring(0, 2));
+    if (annee > DateTime.now().year)
+      annee = 1900 + annee;
+    else
+      annee = 2000 + annee;
+    int annees = DateTime.now().year - annee;
+    int mois = int.parse(this._npp.substring(2, 4));
+    int jour = int.parse(this._npp.substring(4, 6));
+    DateTime dateAnniv = DateTime(DateTime.now().year, mois, jour);
+    if (DateTime.now().isBefore(dateAnniv)) annees--;
+    return annees;
+  }
 }

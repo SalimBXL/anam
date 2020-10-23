@@ -19,9 +19,9 @@ class Anam extends StatelessWidget {
       routes: {
         '/dashboard': (context) => Dashboard(),
         '/patientSheet': (context) => PatientSheet(patient: null),
-        '/patientDetails': (context) => PatientDetails(),
-        '/injection': (context) => Injection(),
-        '/acquisition': (context) => Acquisition(),
+        '/patientDetails': (context) => PatientDetails(patient: null),
+        '/injection': (context) => Injection(patient: null),
+        '/acquisition': (context) => Acquisition(patient: null),
       },
     );
   }

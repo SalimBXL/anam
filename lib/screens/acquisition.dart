@@ -1,3 +1,4 @@
+import 'package:anam/classes/patient.dart';
 import 'package:anam/widgets/button_ok.dart';
 import 'package:anam/widgets/card_bloc.dart';
 import 'package:anam/widgets/patient_name_bloc.dart';
@@ -5,16 +6,32 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+const double iconSize = 30;
+const double bigTextSize = 20;
+
 class Acquisition extends StatefulWidget {
-  Acquisition({Key key}) : super(key: key);
+  Acquisition({@required this.patient});
 
   final String pageName = 'acquisition';
+  final Patient patient;
 
   @override
   _AcquisitionState createState() => _AcquisitionState();
 }
 
 class _AcquisitionState extends State<Acquisition> {
+  Patient patient;
+
+  @override
+  void initState() {
+    super.initState();
+    updateUI(widget.patient);
+  }
+
+  void updateUI(Patient p) {
+    patient = p;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,36 +48,14 @@ class _AcquisitionState extends State<Acquisition> {
                 children: <Widget>[
                   CardBloc(
                       child: PatientNameBloc(
-                    nomPatient: 'SEVINDIK Evrim',
-                    nppPatient: '041220FD05',
+                    nomPatient: patient.fullname,
+                    nppPatient: patient.npp,
                   )),
-                  CardBloc(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Icon(
-                          FontAwesomeIcons.radiationAlt,
-                          color: Colors.purple,
-                          size: 30,
-                        ),
-                        camera(),
-                      ],
-                    ),
-                  ),
+                  CardBloc(child: camera()),
                   CardBloc(child: acquisitionDetails()),
                   CardBloc(child: start()),
                   CardBloc(child: reste()),
                   CardBloc(child: nurse()),
-                  CardBloc(
-                    child: Text(
-                      'NOTE : bgyhzgejhfgejh gyezgj hgezy'
-                      ' ejz yuzgf jhzg  yzgefj juejyfgzejy'
-                      'fygjyfgjhg FG FGJ',
-                      softWrap: true,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 3,
-                    ),
-                  ),
                 ],
               ),
               ButtonOk(action: () {
@@ -90,28 +85,39 @@ class _AcquisitionState extends State<Acquisition> {
   Row acquisitionDetails() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(
+            FontAwesomeIcons.clock,
+            size: iconSize,
+          ),
+        ),
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('Entrée prévue : '),
-            Text('Durée prévue : '),
+          children: [
+            Text('Entrée prévue :'),
+            Text('Durée (minutes) :'),
           ],
         ),
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            Text('10:05'),
+          children: [
+            Text(' '),
+            Text(' '),
+          ],
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text('10:15'),
             Text('15'),
           ],
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            Text(' '),
-            Text('minute(s)'),
-          ],
-        )
       ],
     );
   }
@@ -119,25 +125,33 @@ class _AcquisitionState extends State<Acquisition> {
   Row nurse() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(
+            FontAwesomeIcons.userMd,
+            size: iconSize,
+          ),
+        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('Acquisition lancée par : '),
+          children: [
+            Text('Acte réalisé par : '),
+          ],
+        ),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(' '),
           ],
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            Text(''),
+          children: [
+            Text('JR'),
           ],
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            Text('K.L'),
-          ],
-        )
       ],
     );
   }
@@ -145,28 +159,39 @@ class _AcquisitionState extends State<Acquisition> {
   Row reste() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(
+            FontAwesomeIcons.braille,
+            size: iconSize,
+          ),
+        ),
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text('Coincidence : '),
-            Text('Singles : '),
+          children: [
+            Text('Coincidences (count/sec) :'),
+            Text('Singles (10^6) :'),
           ],
         ),
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
+          children: [
+            Text(' '),
+            Text(' '),
+          ],
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
             Text('71746'),
             Text('5.19'),
           ],
         ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            Text('count/sec'),
-            Text('(10^6)'),
-          ],
-        )
       ],
     );
   }
@@ -174,60 +199,73 @@ class _AcquisitionState extends State<Acquisition> {
   Row start() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: <Widget>[
+      mainAxisSize: MainAxisSize.max,
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Icon(
+            FontAwesomeIcons.playCircle,
+            size: iconSize,
+          ),
+        ),
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Text(
-              'PET démarré à :',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
+          children: [
+            Text('PET démarré à :'),
           ],
         ),
         Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
-            Text(
-              '10:20',
-              style: TextStyle(
-                fontWeight: FontWeight.bold,
-              ),
-            ),
-          ],
-        ),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: <Widget>[
+          children: [
             Text(' '),
           ],
-        )
+        ),
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            Text('10:15'),
+          ],
+        ),
       ],
     );
   }
 
-  Text camera() {
-    return Text(
-      'VEREOS',
-      textAlign: TextAlign.center,
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 20,
-      ),
-    );
-  }
-
-  Column patient() {
-    return Column(
-      children: <Widget>[
+  Row camera() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Icon(
+                FontAwesomeIcons.radiationAlt,
+                color: Colors.purple,
+                size: 30,
+              ),
+            ),
+            Text(
+              'Acquisition'.toUpperCase(),
+              textAlign: TextAlign.left,
+              style: TextStyle(
+                fontWeight: FontWeight.bold,
+                fontSize: bigTextSize,
+              ),
+            ),
+          ],
+        ),
         Text(
-          'SEVINDIK Evrim',
+          'VEREOS'.toUpperCase(),
+          textAlign: TextAlign.left,
           style: TextStyle(
             fontWeight: FontWeight.bold,
+            fontSize: bigTextSize,
           ),
         ),
-        Text('[NPP 041220FD05]'),
       ],
     );
   }

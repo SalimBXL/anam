@@ -1,3 +1,5 @@
+import 'package:anam/main.dart';
+
 enum injectLoc { BDR, BGA }
 
 Map<injectLoc, String> injectLocDescr = {
@@ -26,9 +28,18 @@ class Injection {
 
   DateTime get injectionScheduled => this._injectionScheduled;
 
+  String get injectionTimeScheduled {
+    return '${addZero(this._injectionScheduled.hour)}:${addZero(this._injectionScheduled.minute)}';
+  }
+
   set injectionScheduled(DateTime value) => this._injectionScheduled = value;
 
   DateTime get injectionReal => this._injectionReal;
+
+  String get injectionTimeReal {
+    if (this._injectionReal == null) return '';
+    return '${addZero(this._injectionReal.hour)}:${addZero(this._injectionReal.minute)}';
+  }
 
   set injectionReal(DateTime value) => this._injectionReal = value;
 
