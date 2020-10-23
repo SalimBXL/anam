@@ -179,7 +179,7 @@ class _PatientDetailsState extends State<PatientDetails> {
             Text(
               'BMI : ',
               style:
-              TextStyle(fontWeight: FontWeight.bold, fontSize: bigTextSize),
+                  TextStyle(fontWeight: FontWeight.bold, fontSize: bigTextSize),
             ),
             Text('36'),
           ],
