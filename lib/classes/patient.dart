@@ -1,12 +1,16 @@
+import 'dart:math';
+
 import 'package:anam/classes/acquisition.dart';
 
 import 'injection.dart';
 
 enum PatientStatus { all, todo, active, done }
 enum Sex { male, female }
+enum AmbuHospi { ambu, hospi }
 
 class Patient {
-  Patient(this._npp, this._fullname, this._status) {
+  Patient(this._npp, this._fullname, this._status,
+      {this.poidKg, this.tailleCm}) {
     _npp.substring(6, 7).toUpperCase() == "M"
         ? this._sex = Sex.male
         : this._sex = Sex.female;
@@ -18,6 +22,7 @@ class Patient {
             .injectionScheduled
             .add(Duration(minutes: this._injection.length)),
         15);
+    if (this._ambulatoire == null) this._ambulatoire = AmbuHospi.ambu;
   }
 
   Injection _injection;
@@ -26,6 +31,11 @@ class Patient {
   String _fullname;
   PatientStatus _status;
   Sex _sex;
+
+  int poidKg;
+  int tailleCm;
+
+  AmbuHospi _ambulatoire;
 
   DateTime _accueilTimeScheduled;
   DateTime _accueilTimeReal;
@@ -36,11 +46,13 @@ class Patient {
 
   String get fullname => this._fullname;
 
-  PatientStatus get status => this._status;
-
   Sex get sex => this._sex;
 
   bool get isFemale => (this._sex == Sex.female);
+
+  AmbuHospi get ambulatoire => this._ambulatoire;
+  set ambulatoire(AmbuHospi value) => this._ambulatoire = value;
+  bool get isAmbulatoire => (this._ambulatoire == AmbuHospi.ambu);
 
   DateTime get accueilTime {
     return this._accueilTimeReal == null
@@ -54,6 +66,7 @@ class Patient {
         : this._cameraTimeReal;
   }
 
+  PatientStatus get status => this._status;
   set status(PatientStatus newStatus) => this._status = newStatus;
 
   Injection get injection => this._injection;
@@ -62,7 +75,7 @@ class Patient {
 
   int get age {
     int annee = int.parse(this._npp.substring(0, 2));
-    if (annee > DateTime.now().year)
+    if ((2000 + annee) > DateTime.now().year)
       annee = 1900 + annee;
     else
       annee = 2000 + annee;
@@ -73,4 +86,11 @@ class Patient {
     if (DateTime.now().isBefore(dateAnniv)) annees--;
     return annees;
   }
+
+  double get tailleMetre =>
+      (this.tailleCm == null) ? null : this.tailleCm / 100;
+
+  String get bmi => (this.tailleCm == null || this.poidKg == null)
+      ? ''
+      : (this.poidKg / pow(this.tailleMetre, 2)).toStringAsFixed(1);
 }

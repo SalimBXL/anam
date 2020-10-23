@@ -53,6 +53,7 @@ class _PatientDetailsState extends State<PatientDetails> {
                   CardBloc(child: patientInfo()),
                   CardBloc(child: ambu()),
                   CardBloc(child: patientMisc()),
+                  CardBloc(child: poidTaille()),
                   CardBloc(child: annotation()),
                 ],
               ),
@@ -119,7 +120,7 @@ class _PatientDetailsState extends State<PatientDetails> {
 
   Row ambu() {
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
       children: <Widget>[
         Row(
           children: [
@@ -139,20 +140,53 @@ class _PatientDetailsState extends State<PatientDetails> {
             Text(' Statut : '),
           ],
         ),
-        Row(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Icon(FontAwesomeIcons.ambulance),
-            ),
-            Text(' Ambu : '),
-          ],
-        ),
       ],
     );
   }
 
   Row patientMisc() {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: <Widget>[
+        FlatButton(
+          onPressed: () {
+            setState(() {
+              if (!patient.isAmbulatoire) patient.ambulatoire = AmbuHospi.ambu;
+            });
+          },
+          color: patient.isAmbulatoire ? Theme.of(context).primaryColor : null,
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(FontAwesomeIcons.walking),
+              ),
+              Text('Ambu'),
+            ],
+          ),
+        ),
+        FlatButton(
+          onPressed: () {
+            setState(() {
+              if (patient.isAmbulatoire) patient.ambulatoire = AmbuHospi.hospi;
+            });
+          },
+          color: patient.isAmbulatoire ? null : Theme.of(context).primaryColor,
+          child: Row(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Icon(FontAwesomeIcons.hospitalUser),
+              ),
+              Text('Hospi'),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Row poidTaille() {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
@@ -162,7 +196,7 @@ class _PatientDetailsState extends State<PatientDetails> {
               padding: const EdgeInsets.all(8.0),
               child: Icon(FontAwesomeIcons.weightHanging),
             ),
-            Text(' Poids : 98Kg'),
+            Text('${patient.poidKg}Kg'),
           ],
         ),
         Row(
@@ -171,7 +205,7 @@ class _PatientDetailsState extends State<PatientDetails> {
               padding: const EdgeInsets.all(8.0),
               child: Icon(FontAwesomeIcons.textHeight),
             ),
-            Text(' Taille : 1,65m'),
+            Text('${patient.tailleMetre}m'),
           ],
         ),
         Row(
@@ -181,7 +215,7 @@ class _PatientDetailsState extends State<PatientDetails> {
               style:
                   TextStyle(fontWeight: FontWeight.bold, fontSize: bigTextSize),
             ),
-            Text('36'),
+            Text('${patient.bmi}'),
           ],
         ),
       ],

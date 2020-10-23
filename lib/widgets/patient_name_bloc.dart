@@ -25,7 +25,8 @@ class PatientNameBloc extends StatelessWidget {
               size: iconSize,
             ),
             Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Row(
                   children: <Widget>[
